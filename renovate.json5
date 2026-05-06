@@ -1,0 +1,31 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  extends: [ "github>SonarSource/renovate-config:quality-jvm-squad" ],
+  ignorePaths: [
+    "docs/**",
+    "its/sources/**",
+    "its/plugin/projects/**",
+    "java-checks-test-sources/**",
+    "java-surefire/src/test/resources/**",
+  ],
+  packageRules: [
+    {
+      matchPackageNames: [
+        "org.sonarsource.sslr*"
+      ],
+      groupName: "SSLR",
+      groupSlug: "sslr",
+    },
+    {
+      // Major SLF4J version changes can create incompatibilities, so we prefer to update it manually.
+      matchPackageNames: [
+        "org.slf4j:**",
+        "org.slf4j"
+      ],
+      matchUpdateTypes: [
+        "major"
+      ],
+      enabled: false
+    }
+  ],
+}
